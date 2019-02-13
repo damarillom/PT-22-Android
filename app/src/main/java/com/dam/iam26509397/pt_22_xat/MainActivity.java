@@ -1,15 +1,18 @@
 package com.dam.iam26509397.pt_22_xat;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    boolean left = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,14 +21,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
     }
 
     @Override
@@ -48,5 +44,34 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void addToScrollView(View view) {
+        //added LInearLayout
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.LScroll);
+
+        //added LayoutParams
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = left ? Gravity.LEFT : Gravity.RIGHT;
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        EditText edit = (EditText)findViewById(R.id.editext1);
+        String result = edit.getText().toString();
+        //add textView
+        TextView textView = new TextView(this);
+        textView.setText("         " +result);
+        //textView.setId(1);
+        textView.setLayoutParams(params);
+        //textView.setBackground();
+        if (left) {
+            textView.setBackgroundResource(R.drawable.bocadillol);
+            left = false;
+        } else {
+            textView.setBackgroundResource(R.drawable.bocadillor);
+            left = true;
+        }
+
+        //added the textView and the Button to LinearLayout
+        linearLayout.addView(textView);
     }
 }
