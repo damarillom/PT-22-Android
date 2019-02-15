@@ -74,4 +74,64 @@ public class MainActivity extends AppCompatActivity {
         //added the textView and the Button to LinearLayout
         linearLayout.addView(textView);
     }
+
+    public void addToScrollViewEmoji(View view) {
+        //added LInearLayout
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.LScroll);
+
+        //added LayoutParams
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = left ? Gravity.LEFT : Gravity.RIGHT;
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        EditText edit = (EditText)findViewById(R.id.editext1);
+        String result = edit.getText().toString();
+        //add textView
+        TextView textView = new TextView(this);
+        textView.setText(result);
+        //textView.setId(1);
+        textView.setLayoutParams(params);
+        //textView.setBackground();
+        textView.setBackgroundResource(R.drawable.thinking_face_emoji_peq);
+        if (left) {
+            //textView.setBackgroundResource(R.drawable.bocadillol);
+            left = false;
+        } else {
+            //textView.setBackgroundResource(R.drawable.bocadillor);
+            left = true;
+        }
+
+        //added the textView and the Button to LinearLayout
+        linearLayout.addView(textView);
+    }
+
+    public void addToScrollViewPhoto(View view) {
+        //added LInearLayout
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.LScroll);
+
+        //added LayoutParams
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        params.gravity = left ? Gravity.LEFT : Gravity.RIGHT;
+        linearLayout.setOrientation(LinearLayout.VERTICAL);
+
+        EditText edit = (EditText)findViewById(R.id.editext1);
+        String result = edit.getText().toString();
+        //add textView
+        TextView textView = new TextView(this);
+        textView.setText(result);
+        //textView.setId(1);
+        textView.setLayoutParams(params);
+        //textView.setBackground();
+        textView.setBackgroundResource(R.drawable.thinking_face_emoji_peq);
+        if (left) {
+            //textView.setBackgroundResource(R.drawable.bocadillol);
+            left = false;
+        } else {
+            //textView.setBackgroundResource(R.drawable.bocadillor);
+            left = true;
+        }
+
+        //added the textView and the Button to LinearLayout
+        linearLayout.addView(textView);
+    }
 }
