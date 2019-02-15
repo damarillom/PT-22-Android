@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
         String result = edit.getText().toString();
         //add textView
         TextView textView = new TextView(this);
-        textView.setText("         " +result);
+        textView.setText(result);
         //textView.setId(1);
         textView.setLayoutParams(params);
         //textView.setBackground();
