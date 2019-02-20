@@ -1,6 +1,8 @@
 package com.dam.iam26509397.pt_22_xat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -19,9 +21,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -147,8 +151,11 @@ public class MainActivity extends AppCompatActivity {
 
         //added the textView and the Button to LinearLayout
         mImageView = imageView;
-        
+
+
         linearLayout.addView(mImageView);
+
+        dispatchTakePictureIntent();
 
     }
 
@@ -157,14 +164,17 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mImageView.setImageBitmap(imageBitmap);
+            if (extras != null) {
+                Bitmap imageBitmap = (Bitmap) extras.get("data");
+                mImageView.setImageBitmap(imageBitmap);
+            }
         }
     }
 
     private File createImageFile() throws IOException {
         // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        Date date = new Date();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(date);
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
@@ -195,6 +205,10 @@ public class MainActivity extends AppCompatActivity {
                 Uri photoURI = FileProvider.getUriForFile(this,
                         "com.example.android.fileprovider",
                         photoFile);
+                /**Uri photoURI = FileProvider.getUriForFile(this,
+                        "com.dam.iam26509397.pt_22_xat",
+                        photoFile);*/
+
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }
